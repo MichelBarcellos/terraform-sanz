@@ -5,6 +5,11 @@ terraform {
       version = "~> 6.0"
     }
   }
+  backend "s3" {
+    bucket = "sanz-terraform"
+    key    = "dev/terraform-tfstate"
+    region = "us-east-1"
+  }
 }
 
 # Configure the AWS Provider
@@ -18,7 +23,6 @@ resource "aws_instance" "ec2-sanz" {
   ami           = "ami-02f3f602d23f1659d"
   tags = {
     ambiente = "dev"
-    Name = "ec2-sanz"
+    Name     = "ec2-sanz"
   }
-  vpc_security_group_ids = [ "" ]
 }
